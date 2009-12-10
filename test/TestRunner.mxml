@@ -15,8 +15,7 @@
 			core = new FlexUnitCore();
 
             core.addListener( new UIListener( uiListener ));
-            core.run( ApplicationRunnerTest );			
-           
+  
             }
 		]]>
 	</mx:Script>
