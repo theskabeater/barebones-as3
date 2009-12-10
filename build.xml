@@ -1,26 +1,18 @@
 <?xml version="1.0"?>
-<project default="build">
-  <target name="build">
+<project default="compile">
+  <target name="compile">
 	<exec executable="mxmlc">
-	  <arg line="src/as/ApplicationRunner.as" />
-	  <arg line="-output=bin/swf/ApplicationRunner.swf" />
+	  <arg line="src/ApplicationRunner.as" />
+	  <arg line="-output=bin/ApplicationRunner.swf" />
 	</exec>
   </target>
-
 <target name="compileTests">
   <exec executable="mxmlc">
-	<arg line="test/as/TestRunner.mxml" />
-	<arg line="-source-path src/as" />
+	<arg line="test/TestRunner.mxml" />
+	<arg line="-source-path src/" />
 	<arg line="-library-path+=libs/flexunit" />
-	<arg line="-output bin/swf/TestRunner.swf" />
+	<arg line="-output bin/TestRunner.swf" />
 	<arg line="-debug=true" />
   </exec>
  </target>
-
-<target name="runTests" depends="compileTests">
-  <exec executable="firefox" spawn="true">
-	<arg line="${basedir}/bin/html/TestRunner.html" />
-  </exec>
-</target>
-
 </project>
