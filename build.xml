@@ -1,18 +1,63 @@
-<?xml version="1.0"?>
-<project default="compile">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="project_name" default="build">
+  <taskdef resource="flexUnitTasks.tasks" classpath="libs/flexUnitTasks.jar" />
+  
+  <target name="build" depends="clean,test,compile,generate_pmd_report" />  
+  <target name="test" depends="compile_tests,run_tests,generate_test_report,clean_test_results" />
+
   <target name="compile">
-	<exec executable="mxmlc">
-	  <arg line="src/ApplicationRunner.as" />
-	  <arg line="-output=bin/ApplicationRunner.swf" />
-	</exec>
+    <exec executable="mxmlc">
+      <arg line="src/Main.as" />
+      <arg line="-output=build/swf/Main.swf" />
+      <arg line="-source-path=src/" />
+    </exec>
   </target>
-<target name="compileTests">
-  <exec executable="mxmlc">
-	<arg line="test/TestRunner.mxml" />
-	<arg line="-source-path src/" />
-	<arg line="-library-path+=libs/flexunit" />
-	<arg line="-output bin/TestRunner.swf" />
-	<arg line="-debug=true" />
-  </exec>
- </target>
+
+  <target name="compile_tests">
+    <exec executable="mxmlc">
+      <arg line="test/TestRunner.mxml" />
+      <arg line="-output=build/swf/TestRunner.swf" />
+      <arg line="-source-path=src/" />
+      <arg line="-source-path=test/" />
+      <arg line="-library-path+=libs/" />
+    </exec>
+  </target>
+
+  <target name="run_tests">
+    <mkdir dir="reports/" />
+    <mkdir dir="reports/flexunit/" />
+    <flexunit swf="build/swf/TestRunner.swf" toDir="build/reports/flexunit" haltonfailure="false" verbose="true" localTrusted="true" />
+  </target>
+
+  <target name="generate_test_report">
+    <mkdir dir="build/reports/" />
+    <mkdir dir="build/reports/flexunit/" />
+
+    <junitreport todir="build/reports/flexunit/">
+      <fileset dir="build/reports/flexunit/">
+        <include name="TEST-*.xml" />
+      </fileset>
+      <report format="frames" todir="build/reports/flexunit/" />
+    </junitreport>
+  </target>
+
+  <target name="clean_test_results">
+    <delete dir="reports/" />
+  </target>
+
+  <target name="generate_pmd_report">
+    <exec executable="java">
+      <arg line="-Xmx256m" />
+      <arg line="-jar libs/flex-pmd-command-line-1.0.jar" />
+      <arg line="-s src/" />
+      <arg line="-o build/reports/pmd/" />
+    </exec>
+    
+    <mkdir dir="build/reports/pmd" />
+    <xslt in="build/reports/pmd/pmd.xml" style="libs/flex-pmd-report.xslt" out="build/reports/pmd/index.html" />
+  </target>
+
+  <target name="clean">
+    <delete dir="build/" />
+  </target>
 </project>
