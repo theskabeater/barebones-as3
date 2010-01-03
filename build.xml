@@ -33,7 +33,7 @@
     <mkdir dir="build/reports/" />
     <mkdir dir="build/reports/flexunit/" />
 
-    <junitreport todir="build/reports/flexunit/">
+    <junitreport todir="reports/flexunit/">
       <fileset dir="build/reports/flexunit/">
         <include name="TEST-*.xml" />
       </fileset>
