@@ -26,7 +26,7 @@
   <target name="run_tests">
     <mkdir dir="reports/" />
     <mkdir dir="reports/flexunit/" />
-    <flexunit swf="build/swf/TestRunner.swf" toDir="build/reports/flexunit" haltonfailure="false" verbose="true" localTrusted="true" />
+    <flexunit swf="build/swf/TestRunner.swf" toDir="reports/flexunit" haltonfailure="false" verbose="true" localTrusted="true" />
   </target>
 
   <target name="generate_test_report">
@@ -37,7 +37,7 @@
       <fileset dir="build/reports/flexunit/">
         <include name="TEST-*.xml" />
       </fileset>
-      <report format="frames" todir="build/reports/flexunit/" />
+      <report format="frames" todir="reports/flexunit/" />
     </junitreport>
   </target>
 
