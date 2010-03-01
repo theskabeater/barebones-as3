@@ -1,6 +1,6 @@
 Dependency URLs and descriptions for BAREBONES-AS3
 
-Flex SDK: http://opensource.adobe.comAnt is a Java-based build tool. In theory, it is kind of like Make, without Make's wrinkles and with the full portability of pure Java code./wiki/display/flexsdk/Flex+SDK
+Flex SDK: http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK
 
 Flex is a highly productive, open source framework for building and maintaining expressive web applications that deploy consistently on all major browsers, desktops and operating systems.
 
